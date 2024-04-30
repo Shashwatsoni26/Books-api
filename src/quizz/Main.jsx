@@ -1,3 +1,4 @@
+// Main.js
 import React, { useEffect, useState } from "react";
 import { data } from "./data";
 import "./App.css";
@@ -88,6 +89,9 @@ function Main() {
       )}
       {!showScore && (
         <div id="quiz">
+          {data[questionNumber].image && (
+            <img src={data[questionNumber].image} alt="Question" />
+          )}
           <h3>{data[questionNumber].question}</h3>
           <div className="options">
             {data[questionNumber].options.map((option, index) => (
