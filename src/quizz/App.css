@@ -76,4 +76,31 @@ body {
     margin: 0;
     font-size: 20px;
   }
+
+.options img {
+  max-width: 100px; height: auto; 
+  margin-right: 10px; 
+}
+
+
+
+/* CSS for image options */
+.image-option {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.image-option img {
+  width: 100px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  border: 2px solid transparent; /* Border color when not selected */
+}
+
+/* CSS for selected image option */
+.image-option.selected img {
+  border-color: #007bff; /* Border color when selected */
+}
+
+
   

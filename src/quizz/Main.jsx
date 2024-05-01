@@ -1,4 +1,3 @@
-// Main.js
 import React, { useEffect, useState } from "react";
 import { data } from "./data";
 import "./App.css";
@@ -17,12 +16,16 @@ function Main() {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [selectedOption, setSelectedOption] = useState('');
   const [userAnswers, setUserAnswers] = useState(Array(data.length).fill(''));
-  const [timeLeft, setTimeLeft] = useState(5); // Initial time left
+  const [timeLeft, setTimeLeft] = useState(null); // Change initial value to null
+  const [userName, setUserName] = useState('');
+  const [quizStarted, setQuizStarted] = useState(false);
 
   // Shuffle the data array when component mounts
   useEffect(() => {
     shuffleData();
   }, []);
+
+  saveToLocalStorage()
 
   // Function to shuffle data array
   function shuffleData() {
@@ -43,8 +46,20 @@ function Main() {
     return score;
   }
 
+  // Function to save user data to local storage
+  function saveToLocalStorage() {
+    const quizData = {
+      name: userName,
+      score: calculateScore(),
+      dateTime: new Date().toLocaleString()
+    };
+    localStorage.setItem('quizData', JSON.stringify(quizData));
+  }
+
   // useEffect to handle timer and display score at the end
   useEffect(() => {
+    if (timeLeft === null || !quizStarted) return; // Return if timeLeft is null or quiz hasn't started
+
     // Set interval to update timer every second
     const timer = setInterval(() => {
       if (timeLeft > 0) {
@@ -62,7 +77,7 @@ function Main() {
 
     // Clean up the interval when component unmounts or question changes
     return () => clearInterval(timer);
-  }, [timeLeft, questionNumber]);
+  }, [timeLeft, questionNumber, quizStarted]);
 
   // Function to handle option selection
   function handleOptionSelect(option) {
@@ -72,42 +87,75 @@ function Main() {
     setSelectedOption(option);
   }
 
-  // useEffect to clear the previously selected option when question changes
-  useEffect(() => {
-    setSelectedOption('');
-  }, [questionNumber]);
+  // Function to handle quiz start
+  function handleQuizStart() {
+    if (userName.trim() === '') {
+      alert('Please enter your name to start the quiz.');
+      return;
+    }
+    setQuizStarted(true);
+    setTimeLeft(5); // Start the timer after quiz starts
+  }
+
+  // Function to handle user name input
+  function handleNameChange(event) {
+    setUserName(event.target.value);
+  }
 
   return (
     <>
-      <div className="timer">{timeLeft} seconds left</div>
-      {showScore && (
-        <div id="score">
-          <h3>
-            You have scored {calculateScore()} out of {data.length}
-          </h3>
+      {!quizStarted && (
+        <div id="start">
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={userName}
+            onChange={handleNameChange}
+          />
+          <button onClick={handleQuizStart} disabled={!userName.trim()}>Start Quiz</button>
         </div>
       )}
-      {!showScore && (
-        <div id="quiz">
-          {data[questionNumber].image && (
-            <img src={data[questionNumber].image} alt="Question" />
+      {quizStarted && (
+        <>
+          <div className="timer">{timeLeft !== null ? `${timeLeft} seconds left` : ''}</div>
+          {showScore && (
+            <div id="score">
+              <h3>
+                {userName}, you have scored {calculateScore()} out of {data.length}
+              </h3>
+            </div>
           )}
-          <h3>{data[questionNumber].question}</h3>
-          <div className="options">
-            {data[questionNumber].options.map((option, index) => (
-              <label key={index}>
-                <input
-                  type="radio"
-                  name="opt"
-                  value={option}
-                  checked={selectedOption === option}
-                  onChange={() => handleOptionSelect(option)}
-                />
-                <span>{option}</span>
-              </label>
-            ))}
-          </div>
-        </div>
+          {!showScore && (
+            <div id="quiz">
+              {data[questionNumber].image && (
+                <img src={data[questionNumber].image} alt="Question" />
+              )}
+              <h3>{data[questionNumber].question}</h3>
+              <div className="options">
+                {data[questionNumber].options.map((option, index) => (
+                  <label key={index}>
+                    {option.image ? (
+                      <div className="image-option" onClick={() => handleOptionSelect(option.text)}>
+                        <img src={option.image} alt={`Option ${index}`} />
+                      </div>
+                    ) : (
+                      <>
+                        <input
+                          type="radio"
+                          name="opt"
+                          value={option}
+                          checked={selectedOption === option}
+                          onChange={() => handleOptionSelect(option)}
+                        />
+                        <span>{option}</span>
+                      </>
+                    )}
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
       )}
     </>
   );

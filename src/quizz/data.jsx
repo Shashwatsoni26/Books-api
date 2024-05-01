@@ -28,8 +28,21 @@
         options: ["Ram Mandir", "Red Fort", "Taj mahal", "Hawa Mahal"],
       },
       {
-        question: "Choose correct image reprensting GIRRAF?",
-        answer: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtjKmqnJAvKswOksLP_SKOjHMqIm_GA-vLuj__P2TIBc6RUC9A",
-        options: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtjKmqnJAvKswOksLP_SKOjHMqIm_GA-vLuj__P2TIBc6RUC9A", "https://upload.wikimedia.org/wikipedia/commons/6/60/Equus_quagga.jpg", "https://upload.wikimedia.org/wikipedia/commons/6/60/Equus_quagga.jpg", "https://i.natgeofe.com/k/88de42b8-764c-40d2-89ee-e72d55dc95b8/emperor-penguin-chicks.jpg"],
+        question: "Choose correct image reprensting GIRRAFE?",
+        answer: "Girrafe",
+        isImageAnswer: true,
+        options: [
+          { text: "Girrafe", image: "https://compote.slate.com/images/fc3b43be-d932-48b8-b1a1-b9be49a1a438.jpg?crop=1180%2C842%2Cx0%2Cy0&width=1280" },
+          { text: "Dog", image: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQgByBT5IiAT_a2x9pUVb4VMoOrlzHH7Jrzj-HB5jzHlR4lNLMS" },
+          { text: "Zebra", image: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSFo_CZPQiOhql7SggGaq3qTRRQU4etoYi4YQlttdCC6LBfO5R8" },
+          { text: "Penguine", image: "https://i.natgeofe.com/k/88de42b8-764c-40d2-89ee-e72d55dc95b8/emperor-penguin-chicks.jpg" },
+        ],
+      },
+      {
+        question: "Who's not playing in team India t20 squad?",
+        answer: "Mohamad Shammi",
+        options: ["Chiku Bhaiya", "Sanju Samson", "Chatur Chalak Chahal", "Mohamad Shammi"],
       },
     ];
+
+   
