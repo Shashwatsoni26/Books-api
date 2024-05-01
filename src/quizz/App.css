@@ -1,106 +1,113 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  #quiz {
-    width: 400px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  #quiz h3 {
-    margin: 0 0 20px;
-    font-size: 20px;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .options label {
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  
-  .options input[type="radio"] {
-    display: none;
-  }
-  
-  .options input[type="radio"] + span {
-    position: relative;
-    padding-left: 25px;
-  }
-  
-  .options input[type="radio"] + span::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    border: 2px solid #007bff;
-    border-radius: 50%;
-  }
-  
-  .options input[type="radio"]:checked + span::after {
-    content: '';
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #007bff;
-  }
-  
-  #score {
-    width: 400px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  #score h3 {
-    margin: 0;
-    font-size: 20px;
-  }
+/* App.css */
 
-.options img {
-  max-width: 100px; height: auto; 
-  margin-right: 10px; 
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
 
+#start {
+  text-align: center;
+  margin-top: 100px;
+}
 
-
-/* CSS for image options */
-.image-option {
-  display: inline-block;
-  cursor: pointer;
+#start input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
   margin-right: 10px;
 }
 
-.image-option img {
-  width: 100px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  border: 2px solid transparent; /* Border color when not selected */
+#start button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
 }
 
-/* CSS for selected image option */
-.image-option.selected img {
-  border-color: #007bff; /* Border color when selected */
+#start button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.timer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+#score {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#quiz {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#quiz h3 {
+  margin-top: 0;
+}
+
+.options {
+  margin-top: 20px;
+}
+
+.options label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.options input[type="radio"] {
+  display: none;
+}
+
+.options .image-option {
+  cursor: pointer;
+}
+
+.options .image-option img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.options .image-option img:hover {
+  opacity: 0.8;
+}
+
+.options input[type="radio"] + span {
+  margin-left: 5px;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+  #quiz {
+    padding: 15px;
+  }
 }
 
 
-  
+/* App.css */
+
+/* Add this CSS to highlight the selected option */
+.options input[type="radio"]:checked + span {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.options .image-option.selected img {
+  border: 2px solid #007bff;
+}
+
+/* Add this CSS to style the cursor pointer on hover for options */
+.options label:hover {
+  cursor: pointer;
+}
