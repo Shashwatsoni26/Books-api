@@ -22,6 +22,7 @@ function Main() {
 
   // Shuffle the data array when component mounts
   useEffect(() => {
+    
     shuffleData();
   }, []);
 
@@ -31,15 +32,18 @@ function Main() {
   function shuffleData() {
     const shuffledData = shuffleArray(data);
     setQuestionNumber(0);
-    setUserAnswers(Array(data.length).fill(''));
+    setUserAnswers(Array(data.length).fill(''));//blank array
     setShowScore(false);
   }
-
+  console.log(questionNumber);
+  console.log(userAnswers);
   // Function to calculate score
   function calculateScore() {
     let score = 0;
     for (let i = 0; i < data.length; i++) {
       if (userAnswers[i] === data[i].answer) {
+        console.log(userAnswers , data , "array")
+        console.log(userAnswers[i] , data[i].answer , "44")
         score++;
       }
     }
@@ -81,8 +85,10 @@ function Main() {
 
   // Function to handle option selection
   function handleOptionSelect(option) {
+    console.log(option , "option")
     const updatedUserAnswers = [...userAnswers];
     updatedUserAnswers[questionNumber] = option;
+    console.log(updatedUserAnswers , questionNumber , "91")
     setUserAnswers(updatedUserAnswers);
     setSelectedOption(option);
   }
