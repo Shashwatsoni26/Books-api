@@ -81,7 +81,7 @@ function Main() {
 
     // Clean up the interval when component unmounts or question changes
     return () => clearInterval(timer);
-  }, [timeLeft, questionNumber, quizStarted]);
+  }, [timegier, quizStarted]);
 
   // Function to handle option selection
   function handleOptionSelect(option) {
