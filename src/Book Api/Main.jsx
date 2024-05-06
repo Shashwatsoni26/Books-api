@@ -49,9 +49,24 @@ function Main() {
             }
         };
 
+<<<<<<< HEAD
         fetchBooksBySubjects();
     }, []);
 
+=======
+        fetchBooks();
+    }, []);
+
+    useEffect(() => {
+        // Filter books by search term
+        const filteredBooks = booksBySubjects.map(subject => ({
+            ...subject,
+            works: subject.works.filter(book => book.title.toLowerCase().includes(searchTerm.toLowerCase()))
+        }));
+        setSearchResults(filteredBooks);
+    }, [searchTerm, booksBySubjects]);
+
+>>>>>>> b978a992cc4b275bbbda65e1e28c541ab0c22510
     // Function to handle search input change
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
